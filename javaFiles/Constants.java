@@ -12,7 +12,7 @@ public final class Constants {
         public static final double ROBOT_VELOCITY_X = 0;
         public static final double ROBOT_VELOCITY_Y = 0;
         public static final double STARTING_SHOOTER_ANGLE = 30;
-        public static final double STARTING_ROBOT_ANGLE = 91;
+        public static final double STARTING_ROBOT_ANGLE = 180;
 
         public static final double LAUNCH_SPEED = 5;
 
