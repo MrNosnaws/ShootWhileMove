@@ -28,7 +28,7 @@ public class AimingCalculatorTwo {
 
         h = 0.05;
 
-        double shooterAngle = newtonsMethod(Constants.TESTING.STARTING_SHOOTER_ANGLE, 1, 10000000);
+        double shooterAngle = newtonsMethod(180, 1, 10);
         double robotAngle = f(shooterAngle);
         System.out.println("Shooter Angle : " + shooterAngle);
         System.out.println("Robot Angle   : " + robotAngle);
@@ -50,6 +50,7 @@ public class AimingCalculatorTwo {
 
     public static double g(double x) { // x = shooter angle
         double innerRoot = Math.pow(nV * Math.sin(x),2) - (2 * g * dZ);
+        System.out.println(innerRoot);
         double outerRoot = -(nV * Math.sin(x));
 
         double plusRoot = (outerRoot + Math.sqrt(innerRoot)) / -g;
@@ -67,14 +68,16 @@ public class AimingCalculatorTwo {
 
     // Derivative of f(x) - g(x)
     public static double derivative(double x) {
-        double df = (f(x + h) - f(x - h)) / (2 * h);
-        double dg = (g(x + h) - g(x - h)) / (2 * h);
-        return df - dg;
-        // f'(x) - g'(x)
+        double dh = (h(x + h) - h(x)) / h;
+        return dh;
     }
 
     // Function h(x) = f(x) - g(x)
     public static double h(double x) {
+        double f = f(x);;
+        double g = g(x);
+        //System.out.println(f);
+        System.out.println(g);
         return f(x) - g(x);  // (h(x) = f(x) - g(x))
     }
 
@@ -82,8 +85,11 @@ public class AimingCalculatorTwo {
     public static double newtonsMethod(double initialGuess, double tolerance, int maxIterations) {
         double x = initialGuess;
         for (int i = 0; i < maxIterations; i++) {
+            //System.out.println(x);
             double hValue = h(x);
+            System.out.println(hValue);
             double derivativeValue = derivative(x);
+            //System.out.println(derivativeValue);
             if (Math.abs(derivativeValue) < 1e-10) {
                 System.out.println("Derivative too small, method fails.");
                 return Double.NaN;
